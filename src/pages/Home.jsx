@@ -144,6 +144,28 @@ const steps = [
     priority: 'Backend',
     priorityColor: 'text-amber-400',
   },
+  {
+    step: 14,
+    emoji: '▲',
+    title: 'Next.js',
+    desc: 'The React framework for production — adds routing, SSR, static generation, API routes, and SEO in one package.',
+    path: '/nextjs',
+    badge: 'Full Stack',
+    badgeColor: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
+    priority: 'Full Stack',
+    priorityColor: 'text-indigo-400',
+  },
+  {
+    step: 15,
+    emoji: '◈',
+    title: 'GraphQL',
+    desc: 'Query language for APIs — ask for exactly the data you need. Pairs perfectly with React and Apollo Client.',
+    path: '/graphql',
+    badge: 'Full Stack',
+    badgeColor: 'bg-pink-500/20 text-pink-300 border-pink-500/30',
+    priority: 'Full Stack',
+    priorityColor: 'text-pink-400',
+  },
 ]
 
 const groups = [
@@ -151,6 +173,7 @@ const groups = [
   { label: 'Core Hooks (Learn These First)', color: 'text-violet-400', borderColor: 'border-violet-500/30', range: [4, 6] },
   { label: 'Advanced Hooks', color: 'text-orange-400', borderColor: 'border-orange-500/30', range: [7, 10] },
   { label: 'Styling & Backend', color: 'text-cyan-400', borderColor: 'border-cyan-500/30', range: [11, 13] },
+  { label: 'Full Stack', color: 'text-indigo-400', borderColor: 'border-indigo-500/30', range: [14, 15] },
 ]
 
 export default function Home() {
@@ -167,7 +190,7 @@ export default function Home() {
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400"> Zero to Hero</span>
         </h1>
         <p className="text-lg text-slate-400 max-w-2xl mb-8">
-          A step-by-step guide to React, hooks, Tailwind CSS, and Node.js — with live demos and copy-paste code in every section.
+          A step-by-step guide to React, hooks, Tailwind CSS, Node.js, Next.js, and GraphQL — with live demos and copy-paste code in every section.
         </p>
         <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
           <Link to="/getting-started" className="px-5 py-2.5 bg-indigo-500 hover:bg-indigo-400 text-white font-semibold rounded-lg transition-colors">

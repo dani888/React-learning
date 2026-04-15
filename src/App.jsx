@@ -14,6 +14,8 @@ import CustomHooks from './pages/CustomHooks'
 import TailwindPage from './pages/TailwindPage'
 import NodeBasics from './pages/NodeBasics'
 import ExpressJS from './pages/ExpressJS'
+import NextJS from './pages/NextJS'
+import GraphQL from './pages/GraphQL'
 
 export default function App() {
   return (
@@ -36,6 +38,8 @@ export default function App() {
             <Route path="/tailwind" element={<TailwindPage />} />
             <Route path="/nodejs" element={<NodeBasics />} />
             <Route path="/express" element={<ExpressJS />} />
+            <Route path="/nextjs" element={<NextJS />} />
+            <Route path="/graphql" element={<GraphQL />} />
           </Routes>
         </div>
       </main>

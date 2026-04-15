@@ -14,6 +14,8 @@ const pages = [
   { step: 11, label: 'Tailwind CSS', path: '/tailwind' },
   { step: 12, label: 'Node.js Basics', path: '/nodejs' },
   { step: 13, label: 'Express.js', path: '/express' },
+  { step: 14, label: 'Next.js', path: '/nextjs' },
+  { step: 15, label: 'GraphQL', path: '/graphql' },
 ]
 
 export default function PageNav({ currentPath }) {

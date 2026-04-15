@@ -46,6 +46,14 @@ const navGroups = [
       { step: 13, label: 'Express.js', path: '/express' },
     ],
   },
+  {
+    title: 'Full Stack',
+    color: 'text-indigo-400',
+    items: [
+      { step: 14, label: 'Next.js', path: '/nextjs' },
+      { step: 15, label: 'GraphQL', path: '/graphql' },
+    ],
+  },
 ]
 
 export default function Sidebar() {
@@ -62,7 +70,7 @@ export default function Sidebar() {
           </div>
           <div>
             <div className="font-semibold text-white text-sm">React Learning Hub</div>
-            <div className="text-xs text-slate-500">Follow steps 1 → 13</div>
+            <div className="text-xs text-slate-500">Follow steps 1 → 15</div>
           </div>
         </div>
       </div>
