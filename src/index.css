@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+/* Override highlight.js theme to match our dark design */
+.hljs {
+  background: #020617 !important;
+  color: #e2e8f0;
+  padding: 1.25rem !important;
+  border-radius: 0 0 0.5rem 0.5rem !important;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+  font-size: 0.85rem !important;
+  line-height: 1.6 !important;
+  overflow-x: auto;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #1e293b; }
+::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+/* Smooth transitions */
+* { transition-property: color, background-color, border-color; transition-duration: 150ms; }
+
+/* Active sidebar link pulse */
+@keyframes pulse-border {
+  0%, 100% { border-left-color: #6366f1; }
+  50% { border-left-color: #818cf8; }
+}
