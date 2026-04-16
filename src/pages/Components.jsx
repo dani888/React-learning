@@ -156,16 +156,36 @@ export default function Components() {
         <p className="text-xs font-semibold text-sky-400 uppercase tracking-wider mb-2">React Basics</p>
         <h1 className="text-3xl font-bold text-white mb-3">JSX & Components</h1>
         <p className="text-slate-400 leading-relaxed">
-          JSX is the syntax that makes React so intuitive — it lets you write HTML-like code directly in JavaScript.
-          Components are reusable building blocks of your UI.
+          This page covers two fundamental ideas: <strong className="text-white">JSX</strong> (the special syntax you write React code in) and <strong className="text-white">Components</strong> (the building blocks every React app is made of). Everything in React starts here.
         </p>
+      </div>
+
+      {/* Plain English intro */}
+      <div className="bg-sky-500/10 border border-sky-500/30 rounded-xl p-5">
+        <p className="text-xs font-bold text-sky-300 uppercase tracking-wider mb-4">The big picture — what you're about to learn</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="bg-slate-900/60 rounded-xl p-4">
+            <div className="text-2xl mb-2">🧩</div>
+            <p className="font-semibold text-white text-sm mb-1">Components = LEGO bricks</p>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              A component is a small, self-contained piece of your UI — like a button, a card, a navbar, or a whole page. You build each piece once, then reuse it anywhere. A React app is just components inside components inside components.
+            </p>
+          </div>
+          <div className="bg-slate-900/60 rounded-xl p-4">
+            <div className="text-2xl mb-2">📝</div>
+            <p className="font-semibold text-white text-sm mb-1">JSX = HTML and JavaScript mixed together</p>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              JSX is the special syntax React uses. It looks like HTML (<code className="text-sky-300">&lt;h1&gt;</code>, <code className="text-sky-300">&lt;div&gt;</code>) but lives inside JavaScript files. The curly braces <code className="text-sky-300">{'{ }'}</code> let you drop in JavaScript values anywhere inside the HTML-like code.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* JSX */}
       <section>
         <h2 className="text-xl font-bold text-white mb-3">What is JSX?</h2>
         <p className="text-slate-400 text-sm mb-3">
-          JSX stands for <strong className="text-white">JavaScript XML</strong>. It's not HTML — it's syntactic sugar that compiles to <code className="text-indigo-400">React.createElement()</code> calls.
+          JSX stands for <strong className="text-white">JavaScript XML</strong>. It looks like HTML but it lives inside your <code className="text-indigo-400">.jsx</code> files. React automatically converts it into real browser instructions behind the scenes — you don't need to worry about how that works.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -177,7 +197,7 @@ export default function Components() {
 )`} />
           </div>
           <div>
-            <p className="text-xs text-slate-500 mb-1 font-semibold">Compiled to JavaScript:</p>
+            <p className="text-xs text-slate-500 mb-1 font-semibold">React converts it behind the scenes:</p>
             <CodeBlock code={`const element = React.createElement(
   'h1',
   { className: 'title' },
@@ -185,11 +205,15 @@ export default function Components() {
 )`} />
           </div>
         </div>
+        <Callout type="beginner" title="You never write that second version">
+          The compiled version is just shown so you know JSX isn't magic — it gets converted to normal JavaScript. In practice, you only ever write JSX. React handles the conversion automatically.
+        </Callout>
       </section>
 
       {/* JSX Rules */}
       <section>
-        <h2 className="text-xl font-bold text-white mb-3">JSX Rules</h2>
+        <h2 className="text-xl font-bold text-white mb-3">JSX Rules — 4 Things to Remember</h2>
+        <p className="text-slate-400 text-sm mb-4">JSX looks like HTML but has a few important differences. Memorize these 4 rules and you'll avoid the most common beginner errors:</p>
         <div className="space-y-6">
           <div>
             <h3 className="font-semibold text-slate-200 mb-2">1. Return a single root element</h3>
@@ -203,8 +227,10 @@ return (
 )`} />
               </div>
               <div>
-                <p className="text-xs text-green-400 font-semibold mb-1">✅ Wrap in a parent or Fragment</p>
-                <CodeBlock code={`// Use a div, or Fragment <>
+                <p className="text-xs text-green-400 font-semibold mb-1">✅ Wrap in a parent element or Fragment</p>
+                <CodeBlock code={`// Use a <div>, or a Fragment <>...</>
+// A Fragment is an invisible wrapper — it doesn't add
+// any extra HTML to the page, it just satisfies the rule.
 return (
   <>
     <h1>Title</h1>
@@ -225,11 +251,14 @@ return (
 
           <div>
             <h3 className="font-semibold text-slate-200 mb-2">3. Use camelCase for attributes</h3>
-            <CodeBlock code={`// HTML attributes become camelCase in JSX
-<div className="card">       {/* class → className */}
-<label htmlFor="email">      {/* for → htmlFor */}
-<button onClick={handleClick} {/* onclick → onClick */}
-<input tabIndex={1} />       {/* tabindex → tabIndex */}`} />
+            <p className="text-xs text-slate-400 mb-2">
+              "camelCase" means starting with lowercase, then capitalizing each new word — like <code className="text-indigo-300">backgroundColor</code> or <code className="text-indigo-300">onClick</code>. HTML uses all-lowercase (<code className="text-slate-400">onclick</code>, <code className="text-slate-400">class</code>), but JSX uses camelCase versions:
+            </p>
+            <CodeBlock code={`// HTML           →   JSX
+class="card"     →   className="card"    (class is a reserved word in JS)
+for="email"      →   htmlFor="email"     (for is also reserved in JS)
+onclick="..."    →   onClick={handler}   (capital C)
+tabindex="1"     →   tabIndex={1}        (capital I)`} />
           </div>
 
           <div>
@@ -378,9 +407,12 @@ export default App`} />
 
       {/* Class-based components */}
       <section>
-        <h2 className="text-xl font-bold text-white mb-3">Class Components <span className="text-sm font-normal text-slate-500">(Legacy)</span></h2>
+        <h2 className="text-xl font-bold text-white mb-3">Class Components <span className="text-sm font-normal text-slate-500">(Legacy — old way)</span></h2>
+        <p className="text-slate-400 text-sm mb-2">
+          Before 2019, React had a completely different way to write components — using JavaScript <strong className="text-white">classes</strong>. These are called "class components." You might see them in older code or old tutorials. <strong className="text-white">All new code uses function components</strong> — they're simpler and more powerful.
+        </p>
         <p className="text-slate-400 text-sm mb-4">
-          Before hooks were introduced in React 16.8 (2019), state and lifecycle methods could only be used inside <strong className="text-white">class components</strong>. You'll see them in older codebases, so it's good to recognise them — but <strong className="text-white">write function components for all new code</strong>.
+          "Lifecycle methods" are the old way of saying: "run this code when the component appears, updates, or disappears." In modern React, <code className="text-indigo-300">useEffect</code> handles all of that.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">

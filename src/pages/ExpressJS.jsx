@@ -9,7 +9,40 @@ export default function ExpressJS() {
         <p className="text-xs font-semibold text-amber-400 uppercase tracking-wider mb-2">Backend</p>
         <h1 className="text-3xl font-bold text-white mb-3">Express.js</h1>
         <p className="text-slate-400 leading-relaxed">
-          Express is the most popular Node.js web framework. It makes building REST APIs and web servers straightforward with a minimal, flexible design.
+          Express is a library that makes it easy to build a <strong className="text-white">backend server</strong> with Node.js. It's the most popular way to create APIs — the thing your React frontend talks to when it needs to save or load data.
+        </p>
+      </div>
+
+      {/* Plain English intro */}
+      <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-5">
+        <p className="text-xs font-bold text-amber-300 uppercase tracking-wider mb-4">Key words — explained simply</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {[
+            { term: 'Server', def: 'A computer that runs 24/7 waiting for requests. When your React app asks for data, it asks the server. When someone signs up, the server saves it to the database.' },
+            { term: 'API', def: 'Application Programming Interface. A set of URLs your server exposes so other programs (like your React app) can communicate with it. Example: GET /api/users returns a list of users.' },
+            { term: 'REST API', def: 'The most common style of API. Uses URLs + HTTP methods (GET, POST, etc.) to describe what operation you want. "Get me all users" = GET /api/users.' },
+            { term: 'Endpoint', def: 'One specific URL in your API. /api/users and /api/posts are two different endpoints — each one does something different.' },
+            { term: 'JSON', def: 'JavaScript Object Notation. The format servers use to send data back. Looks like a JavaScript object: { "name": "Alice", "age": 30 }. Your React app reads it easily.' },
+            { term: 'Middleware', def: 'A function that runs between the request arriving and your code responding. Like a security guard — every visitor passes through it. Used for logging, authentication, etc.' },
+            { term: 'Status code', def: 'A number the server sends back to describe what happened. 200 = OK, 201 = created, 400 = bad request, 404 = not found, 500 = server error.' },
+            { term: 'CORS', def: 'Cross-Origin Resource Sharing. A browser security rule that blocks your React app from calling an API on a different URL unless the server says it\'s allowed.' },
+          ].map(({ term, def }) => (
+            <div key={term} className="flex gap-3">
+              <span className="text-amber-400 font-bold text-sm flex-shrink-0 w-20">{term}</span>
+              <p className="text-xs text-slate-400 leading-relaxed">{def}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* What Express does */}
+      <div className="bg-slate-900 border border-slate-700/50 rounded-xl p-5">
+        <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">What does Express actually do?</p>
+        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+          Imagine your React app is a customer, and your database is a stockroom. Express is the <strong className="text-white">shop counter</strong> in between. The customer asks "do you have users?" → Express goes to the stockroom (database) → comes back with the answer.
+        </p>
+        <p className="text-sm text-slate-300 leading-relaxed">
+          Without Express, your React app would have no way to save data permanently (React's state disappears when you close the tab) and no way to keep secrets like database passwords safe from users.
         </p>
       </div>
 
@@ -63,8 +96,10 @@ curl http://localhost:3000/api/hello
 
       {/* HTTP Methods + routing */}
       <section>
-        <h2 className="text-xl font-bold text-white mb-3">HTTP Methods & Routes</h2>
-        <p className="text-slate-400 text-sm mb-3">REST APIs use HTTP methods to indicate the operation:</p>
+        <h2 className="text-xl font-bold text-white mb-3">HTTP Methods — How You Tell the Server What You Want</h2>
+        <p className="text-slate-400 text-sm mb-3">
+          Every request to a server has two parts: the <strong className="text-white">URL</strong> (which resource) and the <strong className="text-white">method</strong> (what to do with it). There are 5 methods, and they map to the 4 basic things you can do with data — Create, Read, Update, Delete (called CRUD):
+        </p>
         <div className="overflow-hidden rounded-xl border border-slate-700/50 mb-4">
           <table className="w-full text-sm">
             <thead className="bg-slate-800">
@@ -76,11 +111,11 @@ curl http://localhost:3000/api/hello
             </thead>
             <tbody className="divide-y divide-slate-800">
               {[
-                ['GET', 'Read/fetch data', 'GET /api/users'],
-                ['POST', 'Create new resource', 'POST /api/users'],
-                ['PUT', 'Replace entire resource', 'PUT /api/users/1'],
-                ['PATCH', 'Update part of resource', 'PATCH /api/users/1'],
-                ['DELETE', 'Delete resource', 'DELETE /api/users/1'],
+                ['GET', 'Read data — "give me this"', 'GET /api/users'],
+                ['POST', 'Create new data — "add this"', 'POST /api/users'],
+                ['PUT', 'Replace data completely — "swap this out"', 'PUT /api/users/1'],
+                ['PATCH', 'Update part of data — "change just this field"', 'PATCH /api/users/1'],
+                ['DELETE', 'Delete data — "remove this"', 'DELETE /api/users/1'],
               ].map(([method, purpose, example]) => (
                 <tr key={method} className="bg-slate-900/50">
                   <td className="px-4 py-2.5">
@@ -178,9 +213,12 @@ app.get('/api/users', (req, res) => {
 
       {/* Middleware */}
       <section>
-        <h2 className="text-xl font-bold text-white mb-3">Middleware</h2>
+        <h2 className="text-xl font-bold text-white mb-3">Middleware — Code That Runs on Every Request</h2>
+        <p className="text-slate-400 text-sm mb-2">
+          Middleware is a function that sits in the middle of every request — between the request arriving and your code sending a response. Think of it like a conveyor belt: every package (request) that comes in passes through the same stations before reaching its destination.
+        </p>
         <p className="text-slate-400 text-sm mb-3">
-          Middleware functions run before your route handler. They can log, authenticate, parse bodies, handle errors, etc.
+          Common uses: <strong className="text-white">logging</strong> (record every request), <strong className="text-white">authentication</strong> (check if the user is logged in), <strong className="text-white">parsing</strong> (convert the raw request body into a usable JavaScript object).
         </p>
         <CodeBlock code={`// app.use() registers middleware that runs for ALL routes
 app.use(express.json())          // Parse JSON bodies
@@ -285,9 +323,12 @@ app.use((req, res) => {
 
       {/* CORS */}
       <section>
-        <h2 className="text-xl font-bold text-white mb-3">CORS — Connecting React to Express</h2>
+        <h2 className="text-xl font-bold text-white mb-3">CORS — Letting Your React App Talk to Express</h2>
+        <p className="text-slate-400 text-sm mb-2">
+          When you run your React app (at <code className="text-indigo-300">localhost:5173</code>) and your Express server (at <code className="text-indigo-300">localhost:3000</code>), the browser treats them as two <em>different websites</em> — even though they're both on your computer. For security reasons, browsers block requests between different origins by default.
+        </p>
         <p className="text-slate-400 text-sm mb-3">
-          When your React app (port 5173) calls your Express API (port 3000), the browser blocks it unless your API allows it via CORS headers:
+          To fix this, your Express server needs to explicitly say: "Yes, I allow requests from that React app." That permission is called <strong className="text-white">CORS</strong> (Cross-Origin Resource Sharing). Without it, every <code className="text-slate-300">fetch()</code> call from React will fail with a confusing error.
         </p>
         <CodeBlock language="bash" code={`npm install cors`} />
         <CodeBlock code={`import cors from 'cors'

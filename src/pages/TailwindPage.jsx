@@ -430,13 +430,52 @@ export default function TailwindPage() {
         <p className="text-xs font-semibold text-cyan-400 uppercase tracking-wider mb-2">Styling</p>
         <h1 className="text-3xl font-bold text-white mb-3">Tailwind CSS</h1>
         <p className="text-slate-400 leading-relaxed">
-          Tailwind CSS is a <strong className="text-white">utility-first CSS framework</strong>. Instead of writing custom CSS classes, you compose small utility classes directly in your JSX. No switching between files — everything is in one place.
+          Tailwind CSS is a way to style your web pages. Instead of writing a separate CSS file, you put small style instructions directly on your HTML elements. No switching between files — everything is in one place.
         </p>
+      </div>
+
+      {/* Plain-English intro */}
+      <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl p-5">
+        <p className="text-xs font-bold text-cyan-300 uppercase tracking-wider mb-3">Think of it like this</p>
+        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+          Normal CSS is like buying furniture and then having to paint and assemble each piece yourself. You name your own pieces (<code className="text-cyan-300">.my-button</code>), write what each piece should look like in a separate file, then reference it from your HTML. Two files to manage, lots of naming things.
+        </p>
+        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+          <strong className="text-white">Tailwind is like IKEA with pre-labeled parts.</strong> Instead of inventing names and writing styles, you pick from a set of ready-made pieces: <code className="text-cyan-300">bg-blue-500</code> means "blue background", <code className="text-cyan-300">text-white</code> means "white text", <code className="text-cyan-300">rounded-lg</code> means "rounded corners". You just combine them.
+        </p>
+        <p className="text-sm text-slate-300 leading-relaxed">
+          The result? You never leave your JSX file. Everything you need — colors, sizes, spacing, animations — is built in.
+        </p>
+      </div>
+
+      {/* Key terms */}
+      <div className="bg-slate-800/60 border border-slate-700/50 rounded-xl p-5">
+        <p className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">Key Terms — Plain English</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {[
+            { term: 'CSS', def: 'Cascading Style Sheets — the language that controls how web pages look: colors, fonts, spacing, layout.' },
+            { term: 'Utility class', def: 'A tiny, single-purpose style. bg-blue-500 does exactly one thing: makes the background blue. You combine many utilities instead of writing one big custom class.' },
+            { term: 'Responsive', def: 'The page looks different on different screen sizes. On mobile it might be 1 column; on desktop it might be 4 columns.' },
+            { term: 'Breakpoint', def: 'A screen width where the layout changes. sm: kicks in at 640px, md: at 768px, lg: at 1024px. Below that, mobile styles apply.' },
+            { term: 'Mobile-first', def: 'You design for small screens first, then add changes for bigger screens. The base styles work on mobile; prefixes like md: override them on larger screens.' },
+            { term: 'Flexbox', def: 'A layout tool for arranging items in a row or column. Great for navbars, buttons in a row, or centering something on screen.' },
+            { term: 'Grid', def: 'A layout tool for arranging items in rows AND columns — like a table but much more flexible. Great for card grids and page layouts.' },
+            { term: 'Padding vs Margin', def: 'Padding is the space inside an element (between its content and its border). Margin is the space outside (between elements).' },
+          ].map(({ term, def }) => (
+            <div key={term} className="flex gap-3">
+              <span className="text-cyan-300 font-mono text-xs font-bold flex-shrink-0 w-32">{term}</span>
+              <span className="text-slate-400 text-xs leading-relaxed">{def}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Setup */}
       <section>
         <h2 className="text-xl font-bold text-white mb-3">Setup with Vite</h2>
+        <p className="text-slate-400 text-sm mb-3">
+          If you created your project with Vite, adding Tailwind takes 3 steps: install it, create a config file, and add 3 lines to your CSS. After that, all Tailwind classes are available everywhere in your project.
+        </p>
         <CodeBlock language="bash" code={`npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p`} />
         <CodeBlock filename="tailwind.config.js" code={`export default {
@@ -500,8 +539,11 @@ npx tailwindcss init -p`} />
       {/* Spacing */}
       <section>
         <h2 className="text-xl font-bold text-white mb-3">Spacing: Padding & Margin</h2>
+        <p className="text-slate-400 text-sm mb-2">
+          <strong className="text-white">Padding</strong> = space inside an element, between its content and its edge. <strong className="text-white">Margin</strong> = space outside an element, pushing other elements away.
+        </p>
         <p className="text-slate-400 text-sm mb-3">
-          Tailwind uses a numeric scale where <code className="text-cyan-300">1 unit = 4px</code>. So <code className="text-cyan-300">p-4</code> = padding 16px, <code className="text-cyan-300">m-8</code> = margin 32px.
+          Tailwind uses a scale where each number = 4px. So <code className="text-cyan-300">p-4</code> = 16px of padding on all sides, <code className="text-cyan-300">px-6</code> = 24px on left and right only, <code className="text-cyan-300">mt-2</code> = 8px margin on top only.
         </p>
         <CodeBlock code={`{/* Padding */}
 <div className="p-4">     {/* all sides: 16px */}
@@ -549,6 +591,17 @@ npx tailwindcss init -p`} />
       {/* Flexbox */}
       <section>
         <h2 className="text-xl font-bold text-white mb-3">Flexbox</h2>
+
+        <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl p-4 mb-4">
+          <p className="text-xs font-bold text-cyan-300 uppercase tracking-wider mb-2">What is Flexbox?</p>
+          <p className="text-sm text-slate-300 leading-relaxed mb-2">
+            Flexbox is a layout mode that arranges items in a <strong className="text-white">single line</strong> — either a row (left to right) or a column (top to bottom). It's perfect for navbars, button groups, centering content, or any situation where you want items side by side.
+          </p>
+          <p className="text-sm text-slate-300 leading-relaxed">
+            Add <code className="text-cyan-300">flex</code> to a container and its direct children automatically line up. Then use <code className="text-cyan-300">justify-</code> to control horizontal position and <code className="text-cyan-300">items-</code> to control vertical alignment.
+          </p>
+        </div>
+
         <CodeBlock code={`<div className="flex">             {/* display: flex */}
 <div className="flex flex-col">  {/* column direction */}
 <div className="flex flex-wrap"> {/* wrap items */}
@@ -575,6 +628,17 @@ npx tailwindcss init -p`} />
       {/* Grid */}
       <section>
         <h2 className="text-xl font-bold text-white mb-3">Grid</h2>
+
+        <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl p-4 mb-4">
+          <p className="text-xs font-bold text-cyan-300 uppercase tracking-wider mb-2">Flexbox vs Grid — which to use?</p>
+          <p className="text-sm text-slate-300 leading-relaxed mb-2">
+            <strong className="text-white">Flexbox</strong> — for laying items out in <em>one direction</em> (a row OR a column). Think: navigation menu, a row of buttons, centering something.
+          </p>
+          <p className="text-sm text-slate-300 leading-relaxed">
+            <strong className="text-white">Grid</strong> — for layouts with rows AND columns at the same time. Think: a 3-column card gallery, a page with a sidebar, any repeating tile layout. Add <code className="text-cyan-300">grid</code> to the container and <code className="text-cyan-300">grid-cols-3</code> to say "3 equal columns".
+          </p>
+        </div>
+
         <CodeBlock code={`<div className="grid grid-cols-3 gap-4">  {/* 3 equal columns */}
 <div className="grid grid-cols-12 gap-2"> {/* 12-col layout */}
 
@@ -632,8 +696,24 @@ text-center     text-right       truncate`} />
       {/* Responsive */}
       <section>
         <h2 className="text-xl font-bold text-white mb-3">Responsive Design</h2>
-        <Callout type="info" title="Mobile-first">
-          Unprefixed classes apply to all sizes. Prefixed classes (<code className="text-slate-200">md:</code>, <code className="text-slate-200">lg:</code>) override at that breakpoint and above.
+
+        <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl p-4 mb-4">
+          <p className="text-xs font-bold text-cyan-300 uppercase tracking-wider mb-2">What does "mobile-first" mean?</p>
+          <p className="text-sm text-slate-300 leading-relaxed mb-2">
+            Tailwind is "mobile-first" — the base styles (no prefix) apply to the smallest screen size (phones). Then, as the screen gets wider, you layer on changes using prefixes.
+          </p>
+          <p className="text-sm text-slate-300 leading-relaxed mb-2">
+            <code className="text-cyan-300">grid-cols-1</code> → on all screens, 1 column<br />
+            <code className="text-cyan-300">md:grid-cols-2</code> → on screens 768px+ wide, switch to 2 columns<br />
+            <code className="text-cyan-300">lg:grid-cols-4</code> → on screens 1024px+ wide, switch to 4 columns
+          </p>
+          <p className="text-sm text-slate-300 leading-relaxed">
+            A <strong className="text-white">breakpoint</strong> is just the screen width where a layout change happens. Think of it like: "below 768px = phone layout, above 768px = tablet layout, above 1024px = desktop layout."
+          </p>
+        </div>
+
+        <Callout type="info" title="Breakpoints quick reference">
+          <code className="text-slate-200">sm:</code> ≥640px &nbsp;|&nbsp; <code className="text-slate-200">md:</code> ≥768px &nbsp;|&nbsp; <code className="text-slate-200">lg:</code> ≥1024px &nbsp;|&nbsp; <code className="text-slate-200">xl:</code> ≥1280px. Unprefixed classes apply to all sizes. Prefixed classes override at that size and above.
         </Callout>
         <CodeBlock code={`{/* Breakpoints */}
 sm:  ≥ 640px   md:  ≥ 768px

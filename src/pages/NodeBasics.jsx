@@ -540,26 +540,59 @@ export default function NodeBasics() {
         <p className="text-xs font-semibold text-amber-400 uppercase tracking-wider mb-2">Backend</p>
         <h1 className="text-3xl font-bold text-white mb-3">Node.js Basics</h1>
         <p className="text-slate-400 leading-relaxed">
-          Node.js lets you run JavaScript on the server. Instead of learning PHP or Python for your backend, you use the same language you already know from React. It's fast, async, and has 2 million+ packages available via npm.
+          Node.js lets you run JavaScript <strong className="text-white">outside the browser</strong> — on a server, on your computer, anywhere. You already know JavaScript from React. Node.js means you can use that same knowledge to build your backend too.
         </p>
       </div>
 
-      {/* What is Node */}
-      <section>
-        <h2 className="text-xl font-bold text-white mb-3">What is Node.js?</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+      {/* Plain English intro */}
+      <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-5">
+        <p className="text-xs font-bold text-amber-300 uppercase tracking-wider mb-3">Why does Node.js exist?</p>
+        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+          JavaScript was originally invented to run inside web browsers — it was browser-only. Node.js (created in 2009) took the JavaScript engine out of Chrome and packaged it so JavaScript could run anywhere: your laptop, a server in a data center, anywhere.
+        </p>
+        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+          Before Node.js, if you knew JavaScript (frontend), you still had to learn a completely different language for the backend — Python, PHP, Ruby, Java. Node.js ended that. Now one language works everywhere.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
           {[
-            { icon: '⚡', title: 'V8 Engine', desc: "Built on Chrome's V8 engine — the same JS engine in your browser, but without the DOM." },
-            { icon: '🔄', title: 'Non-blocking I/O', desc: 'Handles thousands of requests without waiting for slow tasks (files, databases, APIs).' },
-            { icon: '📦', title: '2M+ npm Packages', desc: 'The world\'s largest software registry. Anything you need, there\'s already a package.' },
+            { icon: '🌐', title: 'Same language, both sides', desc: 'Use JavaScript for your React frontend AND your Node.js backend. One language to learn instead of two.' },
+            { icon: '📦', title: '2 million+ ready-made packages', desc: 'npm is the world\'s largest collection of free code libraries. Need to send emails, validate passwords, resize images? There\'s a package for it.' },
+            { icon: '⚡', title: 'Fast for web servers', desc: 'Node.js handles many requests at the same time without slowing down — it doesn\'t wait for one to finish before starting the next.' },
           ].map(f => (
-            <div key={f.title} className="bg-slate-800/50 border border-slate-700/50 rounded-xl p-4">
+            <div key={f.title} className="bg-slate-900/60 rounded-xl p-4">
               <div className="text-xl mb-2">{f.icon}</div>
               <div className="font-semibold text-white text-sm mb-1">{f.title}</div>
               <p className="text-xs text-slate-400 leading-relaxed">{f.desc}</p>
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Key terms */}
+      <div className="bg-slate-800/60 border border-slate-700/50 rounded-xl p-5">
+        <p className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">Key Terms — Plain English</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {[
+            { term: 'Runtime', def: 'The environment where code actually runs. Node.js is the runtime for JavaScript outside the browser.' },
+            { term: 'Server', def: 'A computer (or program) that listens for requests and sends back responses. Your Node.js code IS the server.' },
+            { term: 'Event Loop', def: 'Node\'s built-in traffic director. It handles many requests at once without waiting for each one to finish before starting the next.' },
+            { term: 'Non-blocking / Async', def: 'When Node.js starts a slow task (like reading a file), it doesn\'t stop and wait. It moves on to other work, then comes back when the task is done.' },
+            { term: 'I/O', def: 'Stands for Input/Output. Any operation that reads from or writes to something — file system, database, network request.' },
+            { term: 'npm', def: 'Node Package Manager. A huge free library of pre-built code (like plugins) you can install and use in your projects.' },
+            { term: 'Module', def: 'A separate file of code. You split code into modules (files), then import what you need. Like chapters in a book.' },
+            { term: 'process', def: 'A special object in Node.js that gives you info about the running program — like environment variables and the Node version.' },
+          ].map(({ term, def }) => (
+            <div key={term} className="flex gap-3">
+              <span className="text-amber-300 font-mono text-xs font-bold flex-shrink-0 w-36">{term}</span>
+              <span className="text-slate-400 text-xs leading-relaxed">{def}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* What is Node */}
+      <section>
+        <h2 className="text-xl font-bold text-white mb-3">What is Node.js?</h2>
 
         <div className="bg-slate-800/50 border border-amber-500/20 rounded-xl p-4 mb-4">
           <h3 className="font-semibold text-white text-sm mb-2">Browser JS vs Node.js</h3>
@@ -605,13 +638,33 @@ node
       {/* How Node works */}
       <section>
         <h2 className="text-xl font-bold text-white mb-3">How Node.js Handles Requests</h2>
+
+        {/* Plain-English analogy */}
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 mb-4">
+          <p className="text-xs font-bold text-amber-300 uppercase tracking-wider mb-2">Think of it like this</p>
+          <p className="text-sm text-slate-300 leading-relaxed mb-2">
+            Imagine a busy coffee shop with ONE barista. A bad barista would take Order 1, make it completely, hand it over — then take Order 2. Everyone else waits.
+          </p>
+          <p className="text-sm text-slate-300 leading-relaxed mb-2">
+            A great barista takes Order 1, starts the espresso machine, and while it's brewing (slow part), takes Order 2, starts that drink too, then comes back to Order 1 when it's ready. Many drinks happening at once — one barista.
+          </p>
+          <p className="text-sm text-slate-300 leading-relaxed">
+            <strong className="text-amber-300">Node.js is that great barista.</strong> One "thread" (one barista), but it never just stands there waiting. While the database is fetching data, it handles another request. This is called <strong className="text-white">non-blocking I/O</strong>, and the system that makes it work is the <strong className="text-white">Event Loop</strong>.
+          </p>
+        </div>
+
         <p className="text-slate-400 text-sm mb-3">
-          Node.js uses a single-threaded <strong className="text-white">Event Loop</strong> that handles many requests without blocking. This is what makes it so fast for I/O-heavy apps.
+          The <strong className="text-white">Event Loop</strong> is the heart of Node.js. It keeps checking: "Is there any new request? Is any slow task done?" — and handles everything without stopping to wait.
         </p>
         <LiveDemo title="Request lifecycle — click each step">
           <HowNodeWorksDemo />
         </LiveDemo>
       </section>
+
+      {/* REPL explainer */}
+      <Callout type="tip" title="What is the REPL?">
+        REPL stands for Read-Eval-Print-Loop. It's an interactive terminal where you type JavaScript and see the result immediately — like a calculator. Run <code className="text-slate-200">node</code> in your terminal (no filename) to open it. Type <code className="text-slate-200">.exit</code> or press Ctrl+C twice to quit.
+      </Callout>
 
       {/* First script */}
       <section>
@@ -643,8 +696,11 @@ console.log('Port will be:', port)`} />
       {/* Modules */}
       <section>
         <h2 className="text-xl font-bold text-white mb-3">Modules: Importing & Exporting Code</h2>
+        <p className="text-slate-400 text-sm mb-2">
+          As your project grows, you don't want to put everything in one giant file. You split code into separate files called <strong className="text-white">modules</strong>. Each file can export what it has, and other files can import what they need.
+        </p>
         <p className="text-slate-400 text-sm mb-3">
-          Node.js uses a module system to split code across files. There are two syntaxes — CommonJS (older) and ES Modules (modern, same as React uses).
+          Think of it like a toolbox: each tool lives in its own drawer (file). You grab only the tool you need for the job. There are two styles of doing this — CommonJS (older, still common) and ES Modules (modern, same as React uses).
         </p>
         <LiveDemo title="CommonJS vs ES Modules — pick your syntax">
           <ModulesDemo />
@@ -655,7 +711,7 @@ console.log('Port will be:', port)`} />
       <section>
         <h2 className="text-xl font-bold text-white mb-3">Built-in: fs — File System</h2>
         <p className="text-slate-400 text-sm mb-3">
-          The <code className="text-amber-300">fs</code> module lets you read, write, and manage files. Always use the <code className="text-amber-300">fs/promises</code> version for async-friendly code.
+          The <code className="text-amber-300">fs</code> module (short for "file system") lets you read, write, and manage files on your computer — like opening a notebook, writing in it, or checking what's in a folder. Always use the <code className="text-amber-300">fs/promises</code> version so you can use <code className="text-amber-300">await</code> with it.
         </p>
         <LiveDemo title="fs — read, write, list files">
           <FsDemo />
@@ -725,8 +781,22 @@ server.listen(3000, () => {
       {/* Async */}
       <section>
         <h2 className="text-xl font-bold text-white mb-3">Async/Await — The Right Way</h2>
+
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 mb-4">
+          <p className="text-xs font-bold text-amber-300 uppercase tracking-wider mb-2">What does "async" actually mean?</p>
+          <p className="text-sm text-slate-300 leading-relaxed mb-2">
+            Some tasks in code take time — reading a file from disk, fetching data from a database, calling an API. These are called <strong className="text-white">async (asynchronous) operations</strong>.
+          </p>
+          <p className="text-sm text-slate-300 leading-relaxed mb-2">
+            Without async: code waits at each slow step, doing nothing. <em className="text-slate-400">(Line 1 done → wait → Line 2 done → wait...)</em>
+          </p>
+          <p className="text-sm text-slate-300 leading-relaxed">
+            With async/await: you say <code className="text-amber-300">await</code> on slow things so Node.js knows to handle other work while it waits. The <code className="text-amber-300">async</code> keyword marks a function that contains <code className="text-amber-300">await</code>. It's just a clean way to say: "start this, wait for it to finish, then continue."
+          </p>
+        </div>
+
         <p className="text-slate-400 text-sm mb-3">
-          Node.js is async-first. Most operations (files, databases, network) are non-blocking. Use <code className="text-amber-300">async/await</code> to write clean async code:
+          Most Node.js operations — reading files, querying databases, making network requests — are async. The interactive demo below shows why doing them in <strong className="text-white">parallel</strong> is much faster than one at a time:
         </p>
         <LiveDemo title="Sequential vs Parallel — pick the faster pattern">
           <AsyncDemo />
@@ -737,7 +807,7 @@ server.listen(3000, () => {
       <section>
         <h2 className="text-xl font-bold text-white mb-3">Error Handling</h2>
         <p className="text-slate-400 text-sm mb-3">
-          Unhandled errors crash your Node.js process. Always wrap async code in try/catch:
+          If something goes wrong (file not found, database is down, bad data), Node.js will crash the whole server unless you catch the error. Wrap async code in <code className="text-amber-300">try/catch</code> — "try" this, and if something breaks, "catch" the problem gracefully:
         </p>
         <LiveDemo title="Error handling patterns — compare the approaches">
           <ErrorHandlingDemo />
@@ -747,8 +817,11 @@ server.listen(3000, () => {
       {/* npm */}
       <section>
         <h2 className="text-xl font-bold text-white mb-3">npm — Managing Packages</h2>
+        <p className="text-slate-400 text-sm mb-2">
+          npm (Node Package Manager) is like an app store for code. Instead of writing everything from scratch, you install packages — pre-built pieces of code that other developers have shared for free.
+        </p>
         <p className="text-slate-400 text-sm mb-3">
-          npm is Node's package manager. It installs third-party libraries and manages your project's <code className="text-amber-300">package.json</code>.
+          For example: need to send emails? <code className="text-amber-300">npm install nodemailer</code>. Need to validate passwords? <code className="text-amber-300">npm install bcrypt</code>. There are over 2 million packages available. Your project's <code className="text-amber-300">package.json</code> file keeps track of which ones you're using.
         </p>
         <LiveDemo title="npm workflow">
           <NpmDemo />
